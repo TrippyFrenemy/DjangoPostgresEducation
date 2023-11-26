@@ -10,11 +10,15 @@
 <body>
 <main class="container">
     <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
-      {% if user.is_authenticated %}
       <ul>
-{#          <li><a href="{% url 'quotesapp:note' %}" role="button">Add note</a></li>#}
-{#          <li><a href="{% url 'quotesapp:tag' %}" role="button">Add Tag</a></li>#}
+          <li><a href="{% url 'quotesapp:authors_list' %}" role="button">Check author</a></li>
+          <li><a href="{% url 'quotesapp:quotes_list' %}" role="button">Check note</a></li>
       </ul>
+      {% if user.is_authenticated %}
+{#      <ul>#}
+{#          <li><a href="{% url 'quotesapp:authors_list' %}" role="button">Check author</a></li>#}
+{#          <li><a href="{% url 'quotesapp:quotes_list' %}" role="button">Check note</a></li>#}
+{#      </ul>#}
       <ul>
           <li>Welcome <b>{{ user.username }}!</b></li>
           <li><a href="{% url 'users:logout' %}" role="button">Logout</a></li>
