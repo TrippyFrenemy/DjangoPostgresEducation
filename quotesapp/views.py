@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Author, Quote
@@ -22,7 +23,19 @@ def author_detail(request, author_id):
 
 
 def quotes_list(request):
-    quotes = Quote.objects.all()
+    quotes_list = Quote.objects.all()
+    paginator = Paginator(quotes_list, 10) # 10 цитат на сторінку
+
+    page = request.GET.get('page')
+    try:
+        quotes = paginator.page(page)
+    except PageNotAnInteger:
+        # Якщо сторінка не є цілим числом, відображаємо першу сторінку
+        quotes = paginator.page(1)
+    except EmptyPage:
+        # Якщо сторінка виходить за межі діапазону, відображаємо останню сторінку результатів
+        quotes = paginator.page(paginator.num_pages)
+
     return render(request, 'quotesapp/quotes_list.html', {'quotes': quotes})
 
 

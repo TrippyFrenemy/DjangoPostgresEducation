@@ -4,9 +4,11 @@
   <h2>Authors List</h2>
   <ul>
     {% for author in authors %}
-      <li>
-        <a href="{% url 'quotesapp:author_detail' author.id %}">{{ author.fullname }}</a>
-      </li>
+      {% if author.fullname != "test" %}
+        <li>
+          <a href="{% url 'quotesapp:author_detail' author.id %}">{{ author.fullname }}</a>
+        </li>
+      {% endif %}
     {% endfor %}
   </ul>
 {% endblock %}
