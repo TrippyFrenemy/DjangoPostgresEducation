@@ -7,6 +7,9 @@
       <li>
         "{{ quote.quote }}" - <a href="{% url 'quotesapp:author_detail' quote.author.id %}">{{ quote.author.fullname }}</a>
       </li>
+      {% if user.is_authenticated %}
+        <a href="{% url 'quotesapp:delete_quote' quote.id %}" style="color: red;">Delete</a>
+      {% endif %}
     {% endfor %}
   </ul>
 {% endblock %}
